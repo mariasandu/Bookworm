@@ -61,7 +61,13 @@ struct DetailView: View {
             Text("Are you sure you want to delete this book?")
         }
         
-        
+        .toolbar {
+            Button {
+                showingDeleteAlert = true
+            } label: {
+                Label("Delete this book", systemImage: "trash")
+            }
+        }
     }
     func deleteBook() {
         moc.delete(book)
