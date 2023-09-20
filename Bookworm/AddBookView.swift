@@ -19,6 +19,15 @@ struct AddBookView: View {
     @State private var review = ""
     
     let genres = ["Fantasy", "Horror", "Kids", "Mystery", "Poetry", "Romance", "Thriller"]
+    
+    var isValidBook: Bool {
+        if title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ||
+            author.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ||
+            review.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return false
+        }
+        return true
+    }
 
     var body: some View {
         NavigationView {
@@ -61,7 +70,8 @@ struct AddBookView: View {
                         try? moc.save()
                         
                         dismiss()
-                    }
+                    } .disabled(!isValidBook)
+                
                 }
             }
             .navigationTitle("Add Book")
